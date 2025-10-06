@@ -1,5 +1,6 @@
 **1. Installation**
-*1.1 Clone and install all dependencies:
+
+1.1 Clone and install all dependencies:
 <code>sudo apt install -y python3-rosdep
 rosdep update<code>
 
@@ -9,7 +10,7 @@ git clone https://github.com/chvmp/champ_teleop -b ros2
 cd ..
 rosdep install --from-paths src --ignore-src -r -y<code>
 
-*1.2 Build your workspace:
+1.2 Build your workspace:
 <code>cd <your_ws>
 colcon build
 . <your_ws>/install/setup.bash<code>
