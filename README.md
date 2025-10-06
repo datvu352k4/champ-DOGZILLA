@@ -1,5 +1,7 @@
 ## 1. Installation
 
+Test on: Ubuntu 22.04 (ROS2 Humble)
+
 ### 1.1 Clone and install all dependencies:
 
     sudo apt install -y python3-rosdep
@@ -16,7 +18,7 @@
     cd <your_ws>
     colcon build
     . <your_ws>/install/setup.bash
-    
+
 ## 2. Run Rviz and Gazebo simulation:
 
     ros2 launch champ_config gazebo.launch.py
