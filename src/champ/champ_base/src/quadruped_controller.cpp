@@ -104,6 +104,10 @@ void QuadrupedController::controlLoop_()
     geometry::Transformation target_foot_positions[4];
     bool foot_contacts[4];
 
+    req_pose_.position.z += req_vel_.linear.z * 0.0005;
+    if(req_pose_.position.z > 0.23) req_pose_.position.z = 0.23;
+    if(req_pose_.position.z < 0.08) req_pose_.position.z = 0.08;
+
     body_controller_.poseCommand(target_foot_positions, req_pose_);
 
     leg_controller_.velocityCommand(target_foot_positions, req_vel_, rosTimeToChampTime(clock_.now()));
@@ -117,6 +121,7 @@ void QuadrupedController::cmdVelCallback_(const geometry_msgs::msg::Twist::Share
 {
     req_vel_.linear.x = msg->linear.x;
     req_vel_.linear.y = msg->linear.y;
+    req_vel_.linear.z = msg->linear.z;
     req_vel_.angular.z = msg->angular.z;
 }
 
@@ -139,7 +144,7 @@ void QuadrupedController::cmdPoseCallback_(const geometry_msgs::msg::Pose::Share
 
     req_pose_.position.x = msg->position.x;
     req_pose_.position.y = msg->position.y;
-    req_pose_.position.z = msg->position.z +  gait_config_.nominal_height;
+    req_pose_.position.z = msg->position.z + gait_config_.nominal_height;
 }
 
 void QuadrupedController::publishJoints_(float target_joints[12])
