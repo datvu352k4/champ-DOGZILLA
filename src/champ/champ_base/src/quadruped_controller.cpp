@@ -104,6 +104,9 @@ void QuadrupedController::controlLoop_()
     geometry::Transformation target_foot_positions[4];
     bool foot_contacts[4];
 
+    req_pose_.orientation.roll = req_vel_.angular.x * 0.3 ;
+    req_pose_.orientation.pitch = req_vel_.angular.y * 0.3 ;
+
     req_pose_.position.z += req_vel_.linear.z * 0.0005;
     if(req_pose_.position.z > 0.23) req_pose_.position.z = 0.23;
     if(req_pose_.position.z < 0.08) req_pose_.position.z = 0.08;
@@ -122,6 +125,8 @@ void QuadrupedController::cmdVelCallback_(const geometry_msgs::msg::Twist::Share
     req_vel_.linear.x = msg->linear.x;
     req_vel_.linear.y = msg->linear.y;
     req_vel_.linear.z = msg->linear.z;
+    req_vel_.angular.x = msg->angular.x;
+    req_vel_.angular.y = msg->angular.y;
     req_vel_.angular.z = msg->angular.z;
 }
 
